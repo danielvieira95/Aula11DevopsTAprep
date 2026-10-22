@@ -11,7 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+defaults:
+      run:
+        working-directory: ./aula11devops
     steps:
       - name: Baixar codigo do repositorio
         uses: actions/checkout@v5
