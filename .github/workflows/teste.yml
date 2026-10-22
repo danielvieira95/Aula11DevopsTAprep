@@ -1,5 +1,5 @@
 
-name: Build e Testes Spring Boot
+name: Testes e Empacotamento Spring Boot
 
 on:
   push:
@@ -11,11 +11,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-defaults:
+
+    defaults:
       run:
         working-directory: ./aula11devops
+
     steps:
-      - name: Baixar codigo do repositorio
+      - name: Baixar codigo
         uses: actions/checkout@v5
 
       - name: Configurar Java 21
@@ -24,6 +26,7 @@ defaults:
           distribution: temurin
           java-version: '21'
           cache: maven
+          cache-dependency-path: aula11devops/pom.xml
 
       - name: Executar testes e empacotar
         run: mvn -B clean package
@@ -31,8 +34,6 @@ defaults:
       - name: Armazenar arquivo JAR
         uses: actions/upload-artifact@v5
         with:
-          name: aplicacao-springboot
-          path: target/*.jar
+          name: api-produtos
+          path: aula11devops/target/*.jar
           if-no-files-found: error
-
-
